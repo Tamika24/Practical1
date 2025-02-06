@@ -17,3 +17,40 @@ data(airquality)
 str(airquality)
 ```
 
+```{r}
+####missing values####
+missing_matrix<-rowSums(is.na(airquality)) #number of missing in each row
+missing_row_indices<- which(missing_matrix>0) #the indices of rows with missing values
+print(missing_row_indices)
+
+```
+
+```{r}
+####data statistics####
+#====create function====#
+
+calc_stats<- function(x) {(c(mean = mean(x, na.rm=TRUE),
+                             sd = sd(x, na.rm=TRUE),
+                             min = min(x, na.rm=TRUE),
+                             max = max(x, na.rm=TRUE)))
+
+}
+
+#====calculate stats====#
+calc_stats(airquality$Temp)
+calc_stats(airquality$Ozone)
+```
+
+```{r}
+####cars dataset####
+#====loading data====#
+
+data(cars)
+
+#====creating variables====#
+
+Y<- cars$dist
+X<- cbind(1, cars$speed)
+X
+```
+
