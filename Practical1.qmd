@@ -139,4 +139,12 @@ reg_function <- function(a,b){
 reg_function(X,Y)
 ```
 
+```{r}
+####estimates using regression####
+
+model<- lm(dist~speed, data=cars)
+cat("Estimates using regression:\n")
+print(summary_lm)
+
+```
 
