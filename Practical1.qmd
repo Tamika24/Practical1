@@ -12,13 +12,11 @@ Quarto enables you to weave together content and executable code into a finished
 
 data(airquality)
 
-#====structure====#
-
-str(airquality)
 ```
 
 ```{r}
 ####missing values####
+
 missing_matrix<-rowSums(is.na(airquality)) #number of missing in each row
 missing_row_indices<- which(missing_matrix>0) #the indices of rows with missing values
 print(missing_row_indices)
@@ -37,6 +35,7 @@ calc_stats<- function(x) {(c(mean = mean(x, na.rm=TRUE),
 }
 
 #====calculate stats====#
+
 calc_stats(airquality$Temp)
 calc_stats(airquality$Ozone)
 ```
@@ -68,6 +67,7 @@ cat("Estimates using matrix calculation", "\n", beta_hat)
 
 ```{r}
 ####regression output using functions####
+
 reg_function <- function(a,b){
   #====calc beta====#
   beta_hat<- solve(t(X) %*% X) %*% t(X) %*%Y
@@ -136,6 +136,7 @@ reg_function <- function(a,b){
   cat("P-Value:", p_value, "\n")
 }
 #====get output from function====#
+
 reg_function(X,Y)
 ```
 
@@ -145,6 +146,5 @@ reg_function(X,Y)
 model<- lm(dist~speed, data=cars)
 cat("Estimates using regression:\n")
 print(summary_lm)
-
 ```
 
