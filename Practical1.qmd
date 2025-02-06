@@ -54,3 +54,89 @@ X<- cbind(1, cars$speed)
 X
 ```
 
+```{r}
+####estimating coefficients####
+#====calculating beta hat====#
+
+beta_hat<- solve(t(X) %*% X) %*% t(X) %*%Y
+
+#====estimates using matrix calculations====#
+
+cat("Estimates using matrix calculation", "\n", beta_hat)
+
+```
+
+```{r}
+####regression output using functions####
+reg_function <- function(a,b){
+  #====calc beta====#
+  beta_hat<- solve(t(X) %*% X) %*% t(X) %*%Y
+ #====residuals====#
+  y_hat <- X %*% beta_hat 
+  residuals <- Y-y_hat
+  resid_stats <- function(x) {(c(mean = mean(x, na.rm=TRUE),
+                                 median = median(x, na.rm=TRUE),
+                                 min = min(x, na.rm=TRUE),
+                                 max = max(x, na.rm=TRUE),
+                                 Q1= quantile(x,prob=0.25),
+                                 Q3 = quantile(x, prob=0.75)))}
+   resid_stats(round(residuals, 5))
+  #====residual variance====#
+  n <- length(Y) #number of observations
+  p <-  ncol(X) #number of predictors including intercept 
+  residual_var <- sum(residuals^2) / (n - p)
+  
+  #====calc se====#
+  cov_matrix <- residual_var * solve(t(X) %*% X)
+  standard_errors <- sqrt(diag(cov_matrix))
+  
+  #====t values of coefficients====#
+  t_values <- beta_hat / standard_errors
+
+  #====calc pvalue====#
+  p_values <- 2 * pt(-abs(t_values), df = n - p)
+  
+  #====R-squared calculations====#
+  total_sum_of_squares <- sum((Y - mean(Y))^2)
+  residual_sum_of_squares <- sum(residuals^2)
+  r_squared <- 1 - (residual_sum_of_squares / total_sum_of_squares)
+  
+  #====Adjusted R-squared====#
+  adjusted_r_squared <- 1 - ((residual_sum_of_squares / (n - p)) / (total_sum_of_squares / (n - 1)))
+  
+  #====F stat====#
+  #total sum of squares = residual sum of squares + regression sum of squares
+  SSR <- total_sum_of_squares - residual_sum_of_squares
+  
+  #====Degrees of freedom====#
+  n <- length(Y)       # Number of observations
+  p <- ncol(X)         # Number of parameters (intercept + predictors)
+  df1 <- p - 1         # Degrees of freedom for regression
+  df2 <- n - p         # Degrees of freedom for residuals
+  
+  #====Mean Square Regression (MSR) and Mean Square Error (MSE)====#
+  MSR <- SSR / df1
+  MSE <- residual_sum_of_squares / df2
+  
+  #====F-statistic====#
+  F_stat <- MSR / MSE
+  
+  #====p-value for F-statistic====#
+  p_value <- 1 - pf(F_stat, df1, df2)
+  
+  #====print results====#
+  cat("Beta Estimates (Manual Calculation):", beta_hat, "\n")
+  cat("Standard Errors:", standard_errors, "with df", n-p, "\n")
+  cat("T-Values:", t_values, "\n")
+  cat("P-Values:", p_values, "\n")
+  cat("R-Squared:", r_squared, "\n")
+  cat("Adjusted R-Squared:", adjusted_r_squared, "\n")
+  cat("F-Statistic:", F_stat, "\n")
+  cat("Degrees of Freedom: df1 =", df1, ", df2 =", df2, "\n")
+  cat("P-Value:", p_value, "\n")
+}
+#====get output from function====#
+reg_function(X,Y)
+```
+
+
