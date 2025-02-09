@@ -1,5 +1,19 @@
 project:
-  title: "Practical1"
-
-
+  type: website
+website:
+  title: "Peer review"
+  description: "Answers for peer-reviewing of Prac1, Prac2 and Prac day 4"
+  navbar:
+    left:
+      - href: index.qmd
+        text: "Home"
+    right:
+      - text: "Practical 1"
+        href: Practical1.qmd
+      - text: "Practical 2"
+        href: Practical2.qmd
+      - text: "Practical Day 4"
+        href: Practical_day4.qmd
+     
+    
 

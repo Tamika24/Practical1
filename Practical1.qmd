@@ -1,27 +1,40 @@
 ---
-title: "Practical1"
+title: "Practical 1"
+format: html
+toc: true
+toc-depth: 2
+number-sections: true
+code-fold: true
 ---
 
-## Quarto
-
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+# Introduction
+## Setting up the air quality and cars data set
 
 ```{r}
 ####set-up####
-#====dataset====#
+#====airquality dataset====#
 
 data(airquality)
 
+#====cars dataset====#
+
+data(cars)
 ```
+
+# Questions 
+## Calculating the missing values
 
 ```{r}
 ####missing values####
 
 missing_matrix<-rowSums(is.na(airquality)) #number of missing in each row
 missing_row_indices<- which(missing_matrix>0) #the indices of rows with missing values
+cat("The missing value indices")
 print(missing_row_indices)
 
 ```
+
+## Data statistics
 
 ```{r}
 ####data statistics####
@@ -35,23 +48,22 @@ calc_stats<- function(x) {(c(mean = mean(x, na.rm=TRUE),
 }
 
 #====calculate stats====#
-
+cat("Statisics for Temp and Ozone")
 calc_stats(airquality$Temp)
 calc_stats(airquality$Ozone)
 ```
 
+## Cars data set variables
+
 ```{r}
-####cars dataset####
-#====loading data====#
-
-data(cars)
-
-#====creating variables====#
+####creating variables####
 
 Y<- cars$dist
 X<- cbind(1, cars$speed)
-X
+
 ```
+
+## Estimating the coefficients manually
 
 ```{r}
 ####estimating coefficients####
@@ -64,6 +76,8 @@ beta_hat<- solve(t(X) %*% X) %*% t(X) %*%Y
 cat("Estimates using matrix calculation", "\n", beta_hat)
 
 ```
+
+## Manually calculating and outputting the regression values
 
 ```{r}
 ####regression output using functions####
@@ -140,11 +154,12 @@ reg_function <- function(a,b){
 reg_function(X,Y)
 ```
 
+## Using the built-in regression function
+
 ```{r}
 ####estimates using regression####
 
 model<- lm(dist~speed, data=cars)
 cat("Estimates using regression:\n")
-print(summary_lm)
+summary(model)
 ```
-
