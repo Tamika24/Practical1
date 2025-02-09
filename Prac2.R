@@ -1,0 +1,33 @@
+####set-up####
+set.seed(1)
+x <-1:100
+y <- sin(x/10) + rnorm(100, mean=0, sd=0.2)
+####lowess function####
+customLowess <- function(x,y,f) {
+  n <- length(x)
+  y_smooth <- numeric(n)
+  for (i in 1:n) {
+    # Compute weights based on tricube function
+    distances <- abs(x - x[i])
+    max_dist <- sort(distances)[round(f * n)]
+    weights <- (1 - (distances / max_dist)^3)^3 * (distances < max_dist)
+    # Perform weighted linear regression
+    model <- lm(y ~ x, weights = weights)
+    y_smooth[i] <- predict(model, newdata = data.frame(x = x[i]))
+  }
+  return(y_smooth)
+}
+#====Apply custom LOWESS function====#
+
+f_value <- 0.2  # Smoothing parameter
+y_custom <- customLowess(x, y, f = f_value)
+
+#====Apply built-in lowess function====#
+lowess_result <- lowess(x, y, f = f_value, iter = 0)
+
+####Plot results####
+plot(x, y, main = "LOWESS Smoothing Comparison", col = "gray", pch = 16, xlab = "X", ylab = "Y")
+lines(x, y_custom, col = "blue", lwd = 2, lty = 2)  # Custom LOWESS
+lines(lowess_result, col = "red", lwd = 2)         # Built-in LOWESS
+legend("topright", legend = c("Custom LOWESS", "Built-in LOWESS"),
+       col = c("blue", "red"), lwd = 2, lty = c(2, 1))
