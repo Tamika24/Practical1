@@ -7,6 +7,6 @@ format: html
 
 Thank you for visiting! This site contains my solutions for **Practical 1, Practical 2, and Practical Day 4**, covering key concepts and exercises.
 
-Each section includes detailed answers, explanations, and code implementations where necessary. Feel free to navigate through the different practicals using the menu above.
+Each section includes detailed answers, explanations, and code implementations where necessary. Feel free to navigate through the different practicals using the menu above. \<\<\<\<\<\<\< HEAD
 
-The link to Git : <https://github.com/Tamika24/Practical1>
+# The link to Git : <https://github.com/Tamika24/Practical1>
