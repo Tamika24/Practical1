@@ -14,6 +14,7 @@ code-fold: true
 ####set-up####
 #====airquality dataset====#
 
+library(knitr)
 data(airquality)
 
 #====cars dataset====#
@@ -49,8 +50,8 @@ calc_stats<- function(x) {(c(mean = mean(x, na.rm=TRUE),
 
 #====calculate stats====#
 cat("Statisics for Temp and Ozone")
-calc_stats(airquality$Temp)
-calc_stats(airquality$Ozone)
+kable(calc_stats(airquality$Temp))
+kable(calc_stats(airquality$Ozone))
 ```
 
 ## Cars data set variables
