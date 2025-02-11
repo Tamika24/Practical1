@@ -60,14 +60,14 @@
     "href": "Practical1.html",
     "title": "Practical 1",
     "section": "",
-    "text": "Code\n####set-up####\n#====airquality dataset====#\n\ndata(airquality)\n\n#====cars dataset====#\n\ndata(cars)"
+    "text": "Code\n####set-up####\n#====airquality dataset====#\n\nlibrary(knitr)\ndata(airquality)\n\n#====cars dataset====#\n\ndata(cars)"
   },
   {
     "objectID": "Practical1.html#setting-up-the-air-quality-and-cars-data-set",
     "href": "Practical1.html#setting-up-the-air-quality-and-cars-data-set",
     "title": "Practical 1",
     "section": "",
-    "text": "Code\n####set-up####\n#====airquality dataset====#\n\ndata(airquality)\n\n#====cars dataset====#\n\ndata(cars)"
+    "text": "Code\n####set-up####\n#====airquality dataset====#\n\nlibrary(knitr)\ndata(airquality)\n\n#====cars dataset====#\n\ndata(cars)"
   },
   {
     "objectID": "Practical1.html#calculating-the-missing-values",
@@ -81,7 +81,7 @@
     "href": "Practical1.html#data-statistics",
     "title": "Practical 1",
     "section": "2.2 Data statistics",
-    "text": "2.2 Data statistics\n\n\nCode\n####data statistics####\n#====create function====#\n\ncalc_stats&lt;- function(x) {(c(mean = mean(x, na.rm=TRUE),\n                             sd = sd(x, na.rm=TRUE),\n                             min = min(x, na.rm=TRUE),\n                             max = max(x, na.rm=TRUE)))\n\n}\n\n#====calculate stats====#\ncat(\"Statisics for Temp and Ozone\")\n\n\nStatisics for Temp and Ozone\n\n\nCode\ncalc_stats(airquality$Temp)\n\n\n    mean       sd      min      max \n77.88235  9.46527 56.00000 97.00000 \n\n\nCode\ncalc_stats(airquality$Ozone)\n\n\n     mean        sd       min       max \n 42.12931  32.98788   1.00000 168.00000"
+    "text": "2.2 Data statistics\n\n\nCode\n####data statistics####\n#====create function====#\n\ncalc_stats&lt;- function(x) {(c(mean = mean(x, na.rm=TRUE),\n                             sd = sd(x, na.rm=TRUE),\n                             min = min(x, na.rm=TRUE),\n                             max = max(x, na.rm=TRUE)))\n\n}\n\n#====calculate stats====#\ncat(\"Statisics for Temp and Ozone\")\n\n\nStatisics for Temp and Ozone\n\n\nCode\nkable(calc_stats(airquality$Temp))\n\n\n\n\n\n\nx\n\n\n\n\nmean\n77.88235\n\n\nsd\n9.46527\n\n\nmin\n56.00000\n\n\nmax\n97.00000\n\n\n\n\n\nCode\nkable(calc_stats(airquality$Ozone))\n\n\n\n\n\n\nx\n\n\n\n\nmean\n42.12931\n\n\nsd\n32.98788\n\n\nmin\n1.00000\n\n\nmax\n168.00000"
   },
   {
     "objectID": "Practical1.html#cars-data-set-variables",
@@ -144,6 +144,6 @@
     "href": "index.html",
     "title": "Home Page",
     "section": "",
-    "text": "Welcome to My Practical Answers\nThank you for visiting! This site contains my solutions for Practical 1, Practical 2, and Practical Day 4, covering key concepts and exercises.\nEach section includes detailed answers, explanations, and code implementations where necessary. Feel free to navigate through the different practicals using the menu above.\nThe link to Git : https://github.com/Tamika24/Practical1"
+    "text": "Welcome to My Practical Answers\nThank you for visiting! This site contains my solutions for Practical 1, Practical 2, and Practical Day 4, covering key concepts and exercises.\nEach section includes detailed answers, explanations, and code implementations where necessary. Feel free to navigate through the different practicals using the menu above.\n\n\nThe link to Git : https://github.com/Tamika24/Practical1"
   }
 ]
